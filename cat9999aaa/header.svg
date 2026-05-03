@@ -1,0 +1,79 @@
+<svg width="100%" viewBox="0 0 854 170" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes scan {
+      0%   { transform: translateY(0);    opacity: 0; }
+      10%  { opacity: 0.06; }
+      90%  { opacity: 0.06; }
+      100% { transform: translateY(170px); opacity: 0; }
+    }
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes expandLine {
+      from { stroke-dashoffset: 854; }
+      to   { stroke-dashoffset: 0; }
+    }
+    .top-line    { stroke-dasharray: 854; animation: expandLine 1.2s cubic-bezier(.4,0,.2,1) 0s both; }
+    .bot-line    { stroke-dasharray: 854; animation: expandLine 1.2s cubic-bezier(.4,0,.2,1) 0.2s both; }
+    .label-tl    { animation: fadeSlide 0.6s ease 0.5s both; }
+    .label-tr    { animation: fadeSlide 0.6s ease 0.6s both; }
+    .label-bl    { animation: fadeSlide 0.6s ease 1.4s both; }
+    .label-br    { animation: fadeSlide 0.6s ease 1.5s both; }
+    .title       { animation: fadeSlide 0.8s ease 0.9s both; }
+    .subtitle    { animation: fadeSlide 0.8s ease 1.1s both; }
+    .status      { animation: fadeSlide 0.8s ease 1.3s both; }
+    .cursor      { animation: blink 1.1s step-end 1.9s infinite; opacity: 0; }
+    .scanner     { animation: scan 3s linear 1.8s infinite; }
+  </style>
+
+  <!-- Scanline sweep -->
+  <rect x="0" y="0" width="854" height="4" fill="#1a1a1a" class="scanner"/>
+
+  <!-- Top border line -->
+  <line x1="0" y1="18" x2="854" y2="18" stroke="#1a1a1a" stroke-width="0.5" class="top-line"/>
+
+  <!-- Top labels -->
+  <text class="label-tl" x="14" y="13"
+    font-family="'Courier New', Courier, monospace"
+    font-size="9" fill="#888" letter-spacing="1.5">NERV // INTELLIGENCE DIVISION</text>
+  <text class="label-tr" x="840" y="13"
+    font-family="'Courier New', Courier, monospace"
+    font-size="9" fill="#888" text-anchor="end" letter-spacing="1.5">CLEARANCE: LEVEL-S</text>
+
+  <!-- Main title -->
+  <text class="title" x="427" y="88"
+    font-family="'Courier New', Courier, monospace"
+    font-size="40" font-weight="bold" fill="#1a1a1a"
+    text-anchor="middle" letter-spacing="4">AI&#x6700;&#x4E25;&#x5389;&#x7684;&#x7236;&#x4EB2;</text>
+
+  <!-- Blinking cursor -->
+  <rect class="cursor" x="670" y="56" width="3" height="40" fill="#1a1a1a"/>
+
+  <!-- Subtitle -->
+  <text class="subtitle" x="427" y="116"
+    font-family="'Courier New', Courier, monospace"
+    font-size="11" fill="#666"
+    text-anchor="middle" letter-spacing="5">ARCHITECTURE  ·  AUTOMATION  ·  AI ENGINEERING</text>
+
+  <!-- Status bar -->
+  <text class="status" x="427" y="138"
+    font-family="'Courier New', Courier, monospace"
+    font-size="10" fill="#aaa"
+    text-anchor="middle" letter-spacing="2">SYNC  &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;  99.9%  ·  UNIT STATUS: OPERATIONAL</text>
+
+  <!-- Bottom border line -->
+  <line x1="0" y1="152" x2="854" y2="152" stroke="#1a1a1a" stroke-width="0.5" class="bot-line"/>
+
+  <!-- Bottom labels -->
+  <text class="label-bl" x="14" y="165"
+    font-family="'Courier New', Courier, monospace"
+    font-size="9" fill="#aaa" letter-spacing="1">dashen.wang</text>
+  <text class="label-br" x="840" y="165"
+    font-family="'Courier New', Courier, monospace"
+    font-size="9" fill="#aaa" text-anchor="end" letter-spacing="1">@dashen_wang</text>
+</svg>

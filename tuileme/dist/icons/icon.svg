@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffc837"/>
+      <stop offset="100%" style="stop-color:#ff8008"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 满铺背景 -->
+  <rect width="128" height="128" fill="url(#grad)"/>
+  
+  <!-- 黑色冲击核心 (抽象化的爆炸/神经元) -->
+  <path 
+    fill="#000"
+    d="M64 12 L78 48 L116 48 L84 72 L96 112 L64 88 L32 112 L44 72 L12 48 L50 48 Z"
+  />
+  
+  <!-- 十字切割线 - 带来科技感和破坏感 -->
+  <rect x="0" y="60" width="128" height="8" fill="url(#grad)"/>
+  <rect x="60" y="0" width="8" height="128" fill="url(#grad)"/>
+  
+  <!-- 中心菱形核心 -->
+  <rect x="48" y="48" width="32" height="32" fill="#000" transform="rotate(45 64 64)"/>
+  
+  <!-- 能量奇点 -->
+  <circle cx="64" cy="64" r="8" fill="#fff"/>
+</svg>

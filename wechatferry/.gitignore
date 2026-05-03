@@ -1,0 +1,16 @@
+.cache
+.DS_Store
+.idea
+.nuxt
+.output
+.temp
+*.local
+*.log
+*.vsix
+coverage
+dist
+node_modules
+.eslintcache
+docs/.vitepress/dist
+docs/.vitepress/cache
+logs

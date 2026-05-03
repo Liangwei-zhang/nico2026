@@ -1,0 +1,68 @@
+---
+import { getLocaleFromUrl, useTranslations } from '@/i18n/utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section id="showcase" class="py-32 relative">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="reveal section-title mb-4">
+        <span class="gradient-text">{t.showcase.title}</span>
+      </h2>
+      <p class="reveal animation-delay-100 section-subtitle">
+        {t.showcase.subtitle}
+      </p>
+    </div>
+    
+    <div class="reveal animation-delay-200 relative group">
+      <div class="absolute -inset-4 bg-gradient-to-r from-magic-500/20 via-shimmer/20 to-spark-500/20 rounded-[2rem] blur-2xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+      
+      <div class="relative glass-card overflow-hidden aspect-video">
+        <video 
+          id="demo-video"
+          class="w-full h-full rounded-3xl object-cover"
+          poster="/images/video-poster.jpg"
+          controls
+          preload="metadata"
+        >
+          <source src="/videos/demo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        
+        <div id="video-overlay" class="absolute inset-0 bg-gradient-to-br from-magic-500/30 via-cosmic-800 to-spark-500/20 flex items-center justify-center cursor-pointer transition-opacity duration-300">
+          <button class="relative w-24 h-24 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center hover:scale-110 transition-transform">
+            <div class="absolute inset-0 rounded-full bg-magic-500/30 animate-ping"></div>
+            <svg class="w-12 h-12 text-white ml-1 relative z-10" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const overlay = document.getElementById('video-overlay');
+  const video = document.getElementById('demo-video') as HTMLVideoElement;
+  
+  if (overlay && video) {
+    overlay.addEventListener('click', () => {
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+      video.play();
+    });
+    
+    video.addEventListener('pause', () => {
+      overlay.style.opacity = '1';
+      overlay.style.pointerEvents = 'auto';
+    });
+    
+    video.addEventListener('ended', () => {
+      overlay.style.opacity = '1';
+      overlay.style.pointerEvents = 'auto';
+    });
+  }
+</script>

@@ -1,0 +1,62 @@
+---
+import { getLocaleFromUrl, useTranslations } from '@/i18n/utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-magic-500/20 rounded-full blur-[128px] animate-float"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-spark-500/20 rounded-full blur-[128px] animate-float-slow"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-shimmer/10 rounded-full blur-[150px] animate-float-slower"></div>
+  </div>
+  
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    {[...Array(20)].map((_, i) => (
+      <div 
+        class="absolute w-1 h-1 bg-white rounded-full animate-sparkle"
+        style={`
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 3}s;
+          opacity: ${0.3 + Math.random() * 0.5};
+        `}
+      />
+    ))}
+  </div>
+  
+  <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+    <div class="reveal">
+      <span class="inline-block px-4 py-2 rounded-full bg-magic-500/10 border border-magic-500/30 text-magic-300 text-sm mb-8">
+        {t.hero.subtitle}
+      </span>
+    </div>
+    
+    <h1 class="reveal animation-delay-100 section-title mb-6">
+      <span class="gradient-text">{t.hero.title}</span>
+    </h1>
+    
+    <p class="reveal animation-delay-200 text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
+      {t.hero.description}
+    </p>
+    
+    <div class="reveal animation-delay-300 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#contact" class="btn-magic">
+        {t.hero.cta}
+      </a>
+      <a href="#showcase" class="btn-secondary flex items-center gap-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
+        </svg>
+        {t.hero.watchDemo}
+      </a>
+    </div>
+  </div>
+  
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+    </svg>
+  </div>
+</section>

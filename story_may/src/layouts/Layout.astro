@@ -1,0 +1,60 @@
+---
+import '@/styles/global.css';
+import { getLocaleFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const { title = t.siteTitle, description = t.siteDescription } = Astro.props;
+
+const alternateLocale = locale === 'zh-CN' ? 'en' : 'zh-CN';
+const currentPath = Astro.url.pathname.replace(/^\/(zh-CN|en)/, '') || '/';
+---
+
+<!doctype html>
+<html lang={locale === 'zh-CN' ? 'zh-CN' : 'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0D0B1A" />
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={Astro.url.href} />
+    <link rel="alternate" hreflang={locale} href={Astro.url.href} />
+    <link rel="alternate" hreflang={alternateLocale} href={`/${alternateLocale}${currentPath}`} />
+    <link rel="alternate" hreflang="x-default" href="/zh-CN/" />
+    
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:locale" content={locale === 'zh-CN' ? 'zh_CN' : 'en_US'} />
+    
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen overflow-x-hidden noise-overlay">
+    <slot />
+    
+    <script>
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+      
+      revealElements.forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

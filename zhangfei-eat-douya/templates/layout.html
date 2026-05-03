@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张飞吃豆芽 - AI文章生成器">
+    <title>{% block title %}张飞吃豆芽{% endblock %}</title>
+
+    <!-- 新的模块化CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- 页面特定CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-brand">张飞吃豆芽</h1>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">✍️ 写作</a></li>
+                <li><a href="/config" class="nav-link {% if request.path == '/config' %}active{% endif %}">⚙️ 配置</a></li>
+                <li><a href="/history" class="nav-link {% if request.path == '/history' %}active{% endif %}">📚 历史</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <div class="page-container fade-in">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>Powered by <a href="https://dashen.wang/zhangfei" target="_blank" rel="noopener">dashen.wang</a></p>
+    </footer>
+
+    <!-- 公共JavaScript模块 -->
+    <script src="{{ url_for('static', filename='js/common/utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common/storage.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common/toast.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common/api.js') }}"></script>
+
+    <!-- 页面特定JavaScript -->
+    {% block scripts %}{% endblock %}
+
+    <!-- 初始化脚本 -->
+    <script>
+        // 导航栏滚动效果
+        let lastScroll = 0;
+        window.addEventListener('scroll', Utils.throttle(() => {
+            const currentScroll = window.pageYOffset;
+            const navbar = document.querySelector('.navbar');
+
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        }, 100));
+    </script>
+</body>
+</html>

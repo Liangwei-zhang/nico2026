@@ -1,0 +1,79 @@
+{
+  "gemini_api_key": "YOUR_GEMINI_API_KEY",
+  "gemini_base_url": "https://generativelanguage.googleapis.com",
+  "unsplash_access_key": "YOUR_UNSPLASH_ACCESS_KEY",
+  "pexels_api_key": "YOUR_PEXELS_API_KEY",
+  "pixabay_api_key": "YOUR_PIXABAY_API_KEY",
+  "default_model": "gemini-pro",
+  "default_prompt": "",
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "enable_google_search": true,
+  "append_citations": false,
+  "max_concurrent_tasks": 3,
+  "max_retry_attempts": 10,
+  "pandoc_path": "",
+  "output_directory": "output",
+  "image_source_priority": [
+    "user_uploaded",
+    "comfyui",
+    "gemini_image",
+    "pexels",
+    "unsplash",
+    "pixabay",
+    "local"
+  ],
+  "local_image_directories": [
+    {
+      "path": "pic",
+      "tags": [
+        "default",
+        "general"
+      ]
+    },
+    {
+      "path": "images/nature",
+      "tags": [
+        "nature",
+        "landscape"
+      ]
+    },
+    {
+      "path": "images/tech",
+      "tags": [
+        "technology",
+        "business"
+      ]
+    }
+  ],
+  "enable_user_upload": true,
+  "uploaded_images_dir": "uploads",
+  "comfyui_settings": {
+    "enabled": true,
+    "server_url": "http://127.0.0.1:8188",
+    "queue_size": 2,
+    "timeout_seconds": 180,
+    "max_attempts": 2,
+    "seed": -1,
+    "workflow_path": "workflows/example_workflow.json"
+  },
+  "comfyui_image_count": 1,
+  "comfyui_style_template": "custom",
+  "comfyui_positive_style": "",
+  "comfyui_negative_style": "",
+  "comfyui_summary_model": "gemini-pro",
+  "gemini_image_settings": {
+    "enabled": false,
+    "api_key": "",
+    "base_url": "",
+    "model": "gemini-2.5-flash-image-preview",
+    "style": "realistic",
+    "aspect_ratio": "16:9",
+    "custom_prefix": "",
+    "custom_suffix": "",
+    "ethnicity": "auto",
+    "auto_detect_topic": true,
+    "max_retries": 3,
+    "timeout": 30
+  }
+}

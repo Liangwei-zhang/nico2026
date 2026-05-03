@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>推了么 /// MAGI SYSTEM INTERFACE</title>
+    <style>
+        @font-face {
+            font-family: 'Orbitron';
+            src: url('assets/fonts/Orbitron-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Orbitron';
+            src: url('assets/fonts/Orbitron-ExtraBold.woff2') format('woff2');
+            font-weight: 900;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Share Tech Mono';
+            src: url('assets/fonts/ShareTechMono-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-display: swap;
+        }
+
+        :root {
+            --nerv-bg: #000020;
+            --nerv-dark: #001231;
+            --nerv-orange: #f0903a;
+            --nerv-red: #e81900;
+            --nerv-green: #58f2a5;
+            --nerv-cyan: #54a2d4;
+            --nerv-gray: #7f7770;
+            --nerv-silver: #c4beb6;
+        }
+
+        * { box-sizing: border-box; cursor: default; }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: #000;
+            background-image: 
+                linear-gradient(rgba(0, 18, 49, 0.9), rgba(0, 18, 49, 0.9)),
+                repeating-linear-gradient(0deg, transparent, transparent 1px, #000 1px, #000 2px);
+            color: var(--nerv-orange);
+            font-family: 'Share Tech Mono', monospace;
+            height: 100vh;
+            overflow: hidden;
+            text-transform: uppercase;
+        }
+
+        body::before {
+            content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 999; background-size: 100% 2px, 3px 100%; pointer-events: none;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-template-rows: 80px 1fr 60px;
+            height: 100vh; padding: 20px; position: relative; z-index: 10;
+        }
+
+        header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            border-bottom: 2px solid var(--nerv-red); padding-bottom: 10px; margin-bottom: 20px;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900;
+            color: var(--nerv-red); text-shadow: 0 0 10px var(--nerv-red); letter-spacing: 5px;
+        }
+        
+        .logo span { font-size: 0.9rem; color: var(--nerv-orange); margin-left: 10px; }
+
+        input[name="tab-control"] { display: none; }
+
+        .main-interface {
+            display: grid; grid-template-columns: 220px 1fr; gap: 20px; height: 100%; overflow: hidden;
+        }
+
+        .nav-column {
+            display: flex; flex-direction: column; gap: 10px; border-right: 1px solid var(--nerv-gray); padding-right: 20px;
+        }
+
+        .nav-label {
+            padding: 12px 10px; border: 1px solid var(--nerv-orange); color: var(--nerv-orange);
+            cursor: pointer; text-align: right; font-family: 'Orbitron'; font-weight: 700;
+            transition: all 0.2s; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        #tab-api:checked ~ .wrapper .nav-column label[for="tab-api"],
+        #tab-persona:checked ~ .wrapper .nav-column label[for="tab-persona"],
+        #tab-ui:checked ~ .wrapper .nav-column label[for="tab-ui"],
+        #tab-adv:checked ~ .wrapper .nav-column label[for="tab-adv"],
+        #tab-about:checked ~ .wrapper .nav-column label[for="tab-about"] {
+            background: var(--nerv-orange); color: #000; box-shadow: 0 0 15px var(--nerv-orange);
+        }
+
+        .content-display {
+            border: 1px solid var(--nerv-dark); background: rgba(0, 18, 49, 0.8);
+            position: relative; overflow-y: auto; padding: 25px;
+            background-image: linear-gradient(45deg, var(--nerv-orange) 5px, transparent 5px), linear-gradient(135deg, var(--nerv-orange) 5px, transparent 5px), linear-gradient(225deg, var(--nerv-orange) 5px, transparent 5px), linear-gradient(315deg, var(--nerv-orange) 5px, transparent 5px);
+            background-position: top left, top right, bottom right, bottom left; background-size: 15px 15px; background-repeat: no-repeat;
+        }
+
+        .section { display: none; animation: slideIn 0.2s steps(5); }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        #tab-api:checked ~ .wrapper .content-display #api-section,
+        #tab-persona:checked ~ .wrapper .content-display #persona-section,
+        #tab-ui:checked ~ .wrapper .content-display #ui-section,
+        #tab-adv:checked ~ .wrapper .content-display #advanced-section,
+        #tab-about:checked ~ .wrapper .content-display #about-section { display: block; }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--nerv-cyan); }
+        
+        input, textarea, select {
+            width: 100%; background: #000; border: 1px solid var(--nerv-gray);
+            border-left: 4px solid var(--nerv-gray); color: var(--nerv-orange); padding: 10px;
+            font-family: 'Share Tech Mono', monospace; font-size: 1rem; outline: none;
+            text-transform: uppercase;
+        }
+        
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23f0903a%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem top 50%;
+            background-size: 0.65rem auto;
+            padding-right: 2rem;
+        }
+
+        option {
+            background-color: #000;
+            color: var(--nerv-orange);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        input:focus, textarea:focus, select:focus { 
+            border-color: var(--nerv-orange); 
+            background: rgba(240, 144, 58, 0.1);
+            box-shadow: 0 0 10px rgba(240, 144, 58, 0.2);
+        }
+
+        .btn {
+            background: transparent; border: 1px solid var(--nerv-orange); color: var(--nerv-orange);
+            padding: 8px 20px; font-family: 'Orbitron'; font-weight: 700; cursor: pointer; transition: all 0.1s;
+        }
+        .btn:hover { background: var(--nerv-orange); color: #000; box-shadow: 0 0 15px var(--nerv-orange); }
+        .btn-primary { border-color: var(--nerv-green); color: var(--nerv-green); }
+        .btn-primary:hover { background: var(--nerv-green); color: #000; }
+        .danger { border-color: var(--nerv-red); color: var(--nerv-red); }
+
+        .persona-card { border: 1px solid var(--nerv-gray); background: rgba(0,0,0,0.4); padding: 15px; margin-bottom: 15px; }
+
+        #personaList {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .profile-container { border-left: 3px solid var(--nerv-red); padding-left: 20px; }
+        .profile-name { font-size: 1.5rem; color: var(--nerv-red); margin-bottom: 10px; font-family: 'Orbitron'; }
+        .profile-title { color: var(--nerv-cyan); font-size: 0.9rem; margin-bottom: 15px; }
+        .profile-bio { font-size: 0.95rem; line-height: 1.6; color: var(--nerv-silver); text-transform: none; }
+        .profile-link { color: var(--nerv-orange); text-decoration: none; border-bottom: 1px dashed var(--nerv-orange); }
+
+        .ad-box {
+            margin-top: 30px; border: 1px double var(--nerv-cyan); padding: 15px;
+            background: rgba(84, 162, 212, 0.05); position: relative;
+        }
+        .ad-tag {
+            position: absolute; top: -10px; right: 10px; background: var(--nerv-bg);
+            border: 1px solid var(--nerv-cyan); color: var(--nerv-cyan); font-size: 0.6rem; padding: 2px 5px;
+        }
+        .ad-title { color: var(--nerv-green); font-weight: bold; margin-bottom: 8px; font-size: 1rem; }
+        .ad-content { font-size: 0.85rem; color: var(--nerv-silver); line-height: 1.5; text-transform: none; }
+        .ad-cta { display: inline-block; margin-top: 10px; color: var(--nerv-orange); text-decoration: none; border: 1px solid var(--nerv-orange); padding: 4px 10px; font-size: 0.75rem; }
+        .ad-cta:hover { background: var(--nerv-orange); color: #000; }
+
+        footer { border-top: 2px solid var(--nerv-red); display: flex; justify-content: space-between; align-items: center; padding-top: 10px; }
+        .system-msg { font-size: 0.8rem; color: var(--nerv-red); }
+
+        @keyframes blink { 50% { opacity: 0; } }
+        .blink { animation: blink 1s infinite; }
+    </style>
+</head>
+<body>
+    <input type="radio" name="tab-control" id="tab-api" checked>
+    <input type="radio" name="tab-control" id="tab-persona">
+    <input type="radio" name="tab-control" id="tab-ui">
+    <input type="radio" name="tab-control" id="tab-adv">
+    <input type="radio" name="tab-control" id="tab-about">
+
+    <div class="wrapper">
+        <header>
+            <div class="logo">推了么 <span data-i18n="header_sub">MAGI SYSTEM INTERFACE</span></div>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <div class="status-item" style="border: 1px solid var(--nerv-orange); padding: 2px 8px; font-size: 0.7rem;">MAGI: <span class="blink" style="color:var(--nerv-green)">ONLINE</span></div>
+            </div>
+        </header>
+
+        <div class="main-interface">
+            <div class="nav-column">
+                <label for="tab-api" class="nav-label" data-i18n="nav_api">01. API CONFIG</label>
+                <label for="tab-persona" class="nav-label" data-i18n="nav_persona">02. PERSONA MGMT</label>
+                <label for="tab-ui" class="nav-label" data-i18n="nav_ui">03. UI SYSTEMS</label>
+                <label for="tab-adv" class="nav-label" data-i18n="nav_adv">04. ADVANCED</label>
+                <label for="tab-about" class="nav-label" data-i18n="nav_about">05. ABOUT</label>
+            </div>
+
+            <div class="content-display">
+                <div id="api-section" class="section">
+                    <h2 data-i18n="api_title">> API CONNECTION SETUP</h2>
+                    <div class="form-group">
+                        <label data-i18n="api_key">API KEY [REQUIRED]</label>
+                        <input id="key" type="password" placeholder="sk-..." autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="api_base">BASE URL [OPTIONAL]</label>
+                        <input id="base" type="text" placeholder="https://api.openai.com/v1">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="api_model">TARGET MODEL</label>
+                        <input id="model" type="text" placeholder="gpt-4o-mini">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="api_tokens">MAX TOKENS</label>
+                        <input id="maxTokens" type="number" min="50" max="4000">
+                    </div>
+                </div>
+
+                <div id="persona-section" class="section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 data-i18n="persona_title" style="margin: 0;">> PERSONA DATABASE</h2>
+                        <button class="btn btn-primary" id="addPersona" data-i18n="persona_add">INITIALIZE NEW UNIT</button>
+                    </div>
+                    <div id="personaList"></div>
+                </div>
+
+                <div id="ui-section" class="section">
+                    <h2 data-i18n="ui_title">> VISUAL OUTPUT CONFIG</h2>
+                    <div class="form-group">
+                        <label data-i18n="ui_label">TRIGGER BUTTON LABEL (MAX 6 CHARS)</label>
+                        <input id="label" maxlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="ui_lang">SYSTEM LANGUAGE</label>
+                        <select id="langSelect">
+                            <option value="auto" data-i18n="lang_auto">AUTO</option>
+                            <option value="zh">ZH</option>
+                            <option value="en">EN</option>
+                            <option value="ja">JA</option>
+                            <option value="ko">KO</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="ui_lang_hint" style="color: var(--nerv-gray); font-size: 0.75rem;">SYSTEM LANGUAGE DETECTED: AUTO</label>
+                    </div>
+                </div>
+
+                <div id="advanced-section" class="section">
+                    <h2 data-i18n="adv_title">> SYSTEM DIAGNOSTICS</h2>
+                    <div style="border: 1px dashed var(--nerv-red); padding: 20px; margin-top: 20px;">
+                        <h3 style="color: var(--nerv-red);" data-i18n="adv_danger">DANGER ZONE</h3>
+                        <button class="btn danger" id="resetDefault" data-i18n="adv_reset">FACTORY RESET</button>
+                    </div>
+                </div>
+
+                <div id="about-section" class="section">
+                    <div class="profile-container">
+                        <div class="profile-name">DASHEN.WANG</div>
+                        <div class="profile-title" data-i18n="profile_role">QUANT TRADING LEAD | SYSTEM ARCHITECT</div>
+                        <div class="profile-bio">
+                            <p data-i18n="bio_1">量化交易产品负责人，系统架构师，自动化工具开发者。</p>
+                            <p data-i18n="bio_2">目前常驻上海，偏好可复现的环境与低摩擦的操作系统。</p>
+                            <p data-i18n="bio_3">喜欢把复杂问题拆成模块，喜欢把冷幽默写进 prompt。</p>
+                            <p data-i18n="bio_4">偶尔写点双语内容，偶尔也发点站长体。</p>
+                            <p data-i18n="bio_5">不求热度，只求干净。</p>
+                            <p>📍 <a href="https://dashen.wang" class="profile-link" target="_blank">https://dashen.wang</a></p>
+                        </div>
+                    </div>
+
+                    <div class="ad-box">
+                        <div class="ad-tag">SPONSORED</div>
+                        <div class="ad-title" data-i18n="ad_title">大模型源头网关</div>
+                        <div class="ad-content">
+                            <p data-i18n="ad_feat">高稳定 // 低成本 // 真源头</p>
+                            <p data-i18n="ad_desc">面向企业与创作者的轻量级 AI 接入方案。</p>
+                        </div>
+                        <a href="https://api.dashen.wang/" target="_blank" class="ad-cta" data-i18n="ad_btn">GET ACCESS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="system-msg" id="footerMsg">
+                AWAITING INPUT...
+            </div>
+            <button class="btn btn-primary" id="save" data-i18n="btn_save">EXECUTE SAVE</button>
+        </footer>
+    </div>
+    <script type="module" src="options/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{
+  "name": "wechatferry",
+  "type": "module",
+  "version": "0.0.26",
+  "description": "wechat robot framework based on wechatferry",
+  "author": "mrrhq <sanhua@himrr.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/mrrhq",
+  "homepage": "https://github.com/wechatferry/wechatferry#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wechatferry/wechatferry"
+  },
+  "bugs": "https://github.com/wechatferry/wechatferry/issues",
+  "keywords": [
+    "wechat",
+    "wcferry",
+    "robot"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./agent": {
+      "types": "./dist/agent.d.ts",
+      "default": "./dist/agent.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./puppet": {
+      "types": "./dist/puppet.d.ts",
+      "default": "./dist/puppet.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./plugins": {
+      "types": "./dist/plugins.d.ts",
+      "default": "./dist/plugins.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./logger": {
+      "types": "./dist/logger.d.ts",
+      "default": "./dist/logger.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub"
+  },
+  "dependencies": {
+    "@wechatferry/agent": "workspace:*",
+    "@wechatferry/core": "workspace:*",
+    "@wechatferry/logger": "workspace:*",
+    "@wechatferry/plugins": "workspace:*",
+    "@wechatferry/puppet": "workspace:*"
+  }
+}

@@ -1,0 +1,46 @@
+---
+import { getLocaleFromUrl, useTranslations, switchLocalePath } from '@/i18n/utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const alternateLocale = locale === 'zh-CN' ? 'en' : 'zh-CN';
+const alternatePath = switchLocalePath(Astro.url, alternateLocale);
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+  <nav class="max-w-7xl mx-auto glass-card px-6 py-3 flex items-center justify-between">
+    <a href={`/${locale}/`} class="flex items-center gap-2 group">
+      <span class="text-2xl">✨</span>
+      <span class="font-display text-xl font-semibold gradient-text group-hover:opacity-80 transition-opacity">
+        story.may.cool
+      </span>
+    </a>
+    
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#how-it-works" class="text-white/70 hover:text-white transition-colors">
+        {t.nav.howItWorks}
+      </a>
+      <a href="#showcase" class="text-white/70 hover:text-white transition-colors">
+        {t.nav.showcase}
+      </a>
+      <a href="#features" class="text-white/70 hover:text-white transition-colors">
+        {t.nav.features}
+      </a>
+    </div>
+    
+    <div class="flex items-center gap-4">
+      <a 
+        href={alternatePath}
+        class="px-3 py-1.5 rounded-full border border-white/20 text-sm hover:bg-white/10 transition-colors"
+      >
+        {locale === 'zh-CN' ? 'EN' : '中文'}
+      </a>
+      <a 
+        href="#contact" 
+        class="hidden sm:block px-4 py-2 bg-magic-500/20 border border-magic-500/50 rounded-full text-sm font-medium hover:bg-magic-500/30 transition-colors"
+      >
+        {t.nav.contact}
+      </a>
+    </div>
+  </nav>
+</header>

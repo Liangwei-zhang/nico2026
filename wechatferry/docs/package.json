@@ -1,0 +1,20 @@
+{
+  "name": "docs",
+  "type": "module",
+  "version": "0.0.26",
+  "private": true,
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@iconify-json/carbon": "catalog:",
+    "@iconify-json/logos": "^1.2.4",
+    "@shikijs/vitepress-twoslash": "^1.29.2",
+    "unplugin-vue-components": "^0.27.5",
+    "vitepress": "catalog:",
+    "vitepress-plugin-group-icons": "catalog:"
+  }
+}

@@ -1,0 +1,15 @@
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/zh-CN/*
+  Cache-Control: public, max-age=3600, must-revalidate
+  Vary: Accept-Language
+
+/en/*
+  Cache-Control: public, max-age=3600, must-revalidate
+  Vary: Accept-Language
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
