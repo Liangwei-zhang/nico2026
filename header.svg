@@ -1,0 +1,83 @@
+<svg width="100%" viewBox="0 0 1100 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NICO 2026 AI Engineering Lab">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="52%" stop-color="#101827"/>
+      <stop offset="100%" stop-color="#151515"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7dd3fc"/>
+      <stop offset="45%" stop-color="#c4b5fd"/>
+      <stop offset="100%" stop-color="#facc15"/>
+    </linearGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#ffffff" stroke-width="0.7" opacity="0.08"/>
+    </pattern>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      @keyframes dashMove {
+        from { stroke-dashoffset: 520; }
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes softPulse {
+        0%, 100% { opacity: .35; transform: scale(1); }
+        50% { opacity: .9; transform: scale(1.025); }
+      }
+      @keyframes scanLine {
+        0% { transform: translateX(-160px); opacity: 0; }
+        15% { opacity: .24; }
+        85% { opacity: .24; }
+        100% { transform: translateX(1160px); opacity: 0; }
+      }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .frame { stroke-dasharray: 520; animation: dashMove 1.4s ease-out both; }
+      .scan { animation: scanLine 4.8s linear infinite; }
+      .orb { transform-origin: 850px 120px; animation: softPulse 3.8s ease-in-out infinite; }
+      .fade1 { animation: fadeUp .7s ease .2s both; }
+      .fade2 { animation: fadeUp .7s ease .45s both; }
+      .fade3 { animation: fadeUp .7s ease .7s both; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; }
+      .sans { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1100" height="260" rx="28" fill="url(#bg)"/>
+  <rect width="1100" height="260" rx="28" fill="url(#grid)"/>
+
+  <g opacity="0.9">
+    <path class="frame" d="M44 54H334M44 54V206M44 206H334" fill="none" stroke="url(#accent)" stroke-width="2"/>
+    <path class="frame" d="M1056 54H766M1056 54V206M1056 206H766" fill="none" stroke="url(#accent)" stroke-width="2"/>
+  </g>
+
+  <rect class="scan" x="0" y="0" width="120" height="260" fill="#ffffff" opacity="0.08"/>
+
+  <circle class="orb" cx="850" cy="120" r="76" fill="none" stroke="url(#accent)" stroke-width="2" opacity="0.85" filter="url(#glow)"/>
+  <circle class="orb" cx="850" cy="120" r="36" fill="none" stroke="#7dd3fc" stroke-width="1.4" opacity="0.55"/>
+  <path d="M807 120h86M850 77v86" stroke="#ffffff" stroke-width="1" opacity="0.22"/>
+  <path d="M780 188C814 164 895 164 924 188" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.16"/>
+
+  <g class="fade1">
+    <text x="78" y="87" class="mono" fill="#93c5fd" font-size="16" letter-spacing="4">NICO // 2026</text>
+    <text x="1022" y="87" class="mono" fill="#c4b5fd" font-size="13" text-anchor="end" letter-spacing="3">AI ENGINEERING LAB</text>
+  </g>
+
+  <g class="fade2">
+    <text x="78" y="145" class="sans" fill="#f8fafc" font-size="48" font-weight="800" letter-spacing="1.5">NICO 2026</text>
+    <text x="78" y="178" class="mono" fill="#cbd5e1" font-size="15" letter-spacing="2.2">LLM WORKFLOW · AUTOMATION · QUANT RESEARCH · PRODUCT BUILDING</text>
+  </g>
+
+  <g class="fade3">
+    <rect x="78" y="204" width="310" height="28" rx="14" fill="#ffffff" opacity="0.08"/>
+    <text x="96" y="223" class="mono" fill="#facc15" font-size="12" letter-spacing="2">STATUS: BUILDING IN PUBLIC</text>
+    <text x="1022" y="223" class="mono" fill="#94a3b8" font-size="12" text-anchor="end" letter-spacing="2">github.com/Liangwei-zhang/nico2026</text>
+  </g>
+</svg>
